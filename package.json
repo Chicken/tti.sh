@@ -1,0 +1,17 @@
+{
+    "name": "tti.sh",
+    "version": "0.0.0",
+    "description": "magnificent blog for antti.codes to spout nonsense in",
+    "author": "Antti <antti@antti.codes>",
+    "license": "MIT",
+    "scripts": {
+        "build": "node scripts/build.js",
+        "dev": "watch \"yarn build && sed -E -i -e 's/<!-- dev -->/<meta http-equiv=\\\"refresh\\\" content=\\\"2\\\">/' -e 's/a href=\\\"(\\.[^\\\"]*?)\\\"/a href=\\\"\\1\\/index.html\\\"/' dist/*.html dist/**/*.html\"",
+        "open": "xdg-open dist/index.html"
+    },
+    "type": "module",
+    "private": true,
+    "devDependencies": {
+        "highlight.js": "^11.8.0"
+    }
+}
