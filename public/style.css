@@ -4,6 +4,10 @@
     font-display: swap;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 :root {
     line-height: 1.5;
     font-size: 16px;
@@ -107,20 +111,22 @@ strong > i {
 }
 
 .list-item {
+    text-align: left;
     text-decoration: none;
     margin: 0.5em;
-    width: max-content;
+    width: 100%;
     transition: scale 0.15s ease-in-out;
 }
 
-.list-item > div > div {
-    display: flex;
-    flex-direction: row;
-    gap: 0.6em;
+.divider {
+    margin-left: 0.3em;
+    margin-right: 0.3em;
+    display: inline-block;
 }
 
-.list-item > div > div > h4 {
-    margin: 2px;
+.list-item > div > div > h4,
+.list-item > div > div > p {
+    display: inline-block;
 }
 
 .list-item:hover {
@@ -130,6 +136,18 @@ strong > i {
 .updated,
 .tags {
     font-size: 0.9em;
+}
+
+.metadata {
+    text-align: left;
+}
+
+@media (max-width: 640px) {
+    .metadata .divider {
+        display: block;
+        visibility: hidden;
+        height: 0;
+    }
 }
 
 .back {

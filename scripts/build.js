@@ -53,7 +53,7 @@ for (const article of articles) {
         }
         if (property === "updated") {
             if (article.metadata.updated) {
-                return /*html*/ `<p class="updated">| Updated on ${article.metadata.updated}</p>`;
+                return /*html*/ `<p class="divider">|</p><p class="updated">Updated on ${article.metadata.updated}</p>`;
             } else {
                 return "";
             }
@@ -74,7 +74,7 @@ for (const article of articles) {
         }
         if (property === "updated") {
             if (article.metadata.updated) {
-                return /*html*/ `<span>| Updated on ${article.metadata.updated}</span>`;
+                return /*html*/ `<span class="divider">|</span><span>Updated on ${article.metadata.updated}</span>`;
             } else {
                 return "";
             }
