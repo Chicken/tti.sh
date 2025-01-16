@@ -1,13 +1,16 @@
 ---
 date: 2023-09-16
-updated: 2023-09-17
-title: My first post
-description: A test post for testing features
-tags: coding, meta
+updated: 2025-01-16
+title: A test post
+description: Testing features of this blog platform
+tags: meta, blog
+comments_id: 5ed93fdf-9b90-4b5e-aac9-62baf7530f8c
 draft: false
 ---
 
-Meta post to test out features for the [antti.codes](https://antti.codes/) blog.
+So, I created a blog. This is just a test post for testing it's features.  
+
+<!-- comments -->
 
 ## Headers
 
@@ -21,20 +24,16 @@ Sed semper orci non tellus luctus tincidunt. Nulla facilisi.
 Etiam *vulputate sed nulla nec* malesuada.
 Phasellus ultrices maximus felis et fringilla.
 Quisque ultrices pharetra magna at sagittis.
-<!-- markdownlint-disable-next-line  -->
 Integer **_eleifend auctor molestie_**. Cras tincidunt justo posuere porttitor placerat.
 Nunc pulvinar massa quis interdum mattis. Aenean varius efficitur mollis.
 Morbi eget `tortor dapibus, iaculis ante` ac, **`consectetur`** nulla.
 
-So we do this and that and then we yes  
-lmao yes indeed
+Line  
+break
 
-gg
+> Quotes
 
-> what are these  
-> why do they work
-
-## List
+## Lists
 
 - foo
 - bar
@@ -47,7 +46,9 @@ gg
 
 ## Images
 
-![picture](https://antti.codes/assets/profile_picture.jpg)
+![some cute cat | 250](../public/assets/meta-test/cat.png)
+
+![antti | 300x100](https://antti.codes/assets/profile_picture.jpg)
 
 ## Code
 
@@ -59,8 +60,6 @@ function add(a, b) {
 }
 ```
 
-^ Had to use a library for this one
-
-<div style="display: flex; justify-content: center; align-items: center;">
-    <h2>raw dangerous html!!</h2>
+<div style="width: 100%;">
+    <p style="float: right;">inline html</p>
 </div>

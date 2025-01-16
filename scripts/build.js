@@ -3,11 +3,7 @@ import assert from "node:assert";
 import fs from "node:fs";
 
 if (fs.existsSync("dist")) fs.rmdirSync("dist", { recursive: true });
-fs.mkdirSync("dist");
-
-for (const file of fs.readdirSync("public")) {
-    fs.copyFileSync(`public/${file}`, `dist/${file}`);
-}
+fs.cpSync("./public", "./dist", { recursive: true });
 
 let articles = fs
     .readdirSync("articles")
@@ -23,6 +19,8 @@ let articles = fs
         );
         metadata.slug = file.replace(".md", "");
         metadata.tags = metadata.tags.split(",").map((t) => t.trim());
+        metadata.commentsId = metadata.comments_id;
+        delete metadata.comments_id;
         return {
             metadata,
             content,
@@ -69,18 +67,20 @@ for (const article of articles) {
         if (property === "rawTags") return article.metadata.tags.join(",");
         if (property === "tags") {
             return (
-                '<p class="tags">' +
+                '<p class="tags">Tags: ' +
                 article.metadata.tags.map((tag) => /*html*/ `<code>${tag}</code>`).join(", ") +
                 "</p>"
             );
         }
         if (property === "updated") {
             if (article.metadata.updated) {
-                return /*html*/ `<p class="updated">Updated on ${article.metadata.updated}</p>`;
+                return /*html*/ `<span>| Updated on ${article.metadata.updated}</span>`;
             } else {
                 return "";
             }
         }
+        if (property === "comments")
+            return /*html*/ `<iframe class="comments" src="https://hihan.tti.sh/comments/${article.metadata.commentsId}"></iframe>`;
         if (property === "content") return mdToHtml(article.content);
         if (article.metadata[property]) return article.metadata[property];
         return property;
@@ -130,7 +130,27 @@ function mdToHtml(content) {
         } else if (line.match(/^!\[[^\]]*?\]\([^\)]*?\)$/)) {
             const match = line.match(/^!\[([^\]]*?)\]\(([^\)]*?)\)$/);
             assert(match);
-            html += `<img src="${match[2]}" alt="${match[1]}">\n`;
+            let alt = match[1];
+            let src = match[2];
+            if (src.startsWith("../public/assets/")) {
+                src = src.replace("../public/assets/", "../assets/");
+            }
+            let extra = "";
+            if (alt.includes("|")) {
+                const parts = alt.split("|");
+                assert(parts.length == 2, "Invalid size string");
+                alt = parts[0].trim();
+                const sizeStr = parts[1].trim();
+                if (/^\d+x\d+$/.test(sizeStr)) {
+                    const [width, height] = sizeStr.split("x").map((n) => parseInt(n, 10));
+                    extra = `style="width: ${width}px; height: ${height}px;"`;
+                } else if (/^\d+$/.test(sizeStr)) {
+                    extra = `style="width: ${parseInt(sizeStr, 10)}px;"`;
+                } else {
+                    assert(false, "Invalid size string");
+                }
+            }
+            html += `<img src="${src}" alt="${alt}" ${extra}>\n`;
         } else if (line.startsWith("```")) {
             if (inCode) {
                 const code = codeBuffer.trim();

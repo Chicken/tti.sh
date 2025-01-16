@@ -32,14 +32,36 @@
 
     <h2>{{title}}</h2>
 
-    <p>Released on {{date}}</p>
-    {{updated}}
+    <p>Released on {{date}} {{updated}}</p>
 
     {{tags}}
 
     <div class="content">
         {{content}}
     </div>
+
+    <h3 class="comments-title">Comments</h3>
+
+    {{comments}}
+
+    <script>
+        const comments = document.querySelector(".comments");
+        const origin = new URL(comments.src).origin;
+        const load = Date.now();
+        window.addEventListener("message", (event) => {
+            if (event.origin !== origin) return;
+            if (event.data?.action === "set-size") {
+                const oldScroll = document.body.scrollHeight - window.scrollY;
+                comments.height = event.data.height;
+                if (event.data.editing) return;
+                if (Date.now() - load > 2000) {
+                    const newScroll = document.body.scrollHeight - window.scrollY;
+                    const scrollDiff = oldScroll - newScroll;
+                    window.scroll(0, window.scrollY - scrollDiff)
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>

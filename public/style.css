@@ -11,10 +11,10 @@
     font-variant-ligatures: no-common-ligatures;
 
     --text: #fafafa;
-    --subtext: #dadada;
-    --background: #090609;
+    --subtext: #a1a1aa;
+    --background: #130c13;
     --primary: #b94680;
-    --secondary: #1a0a0a;
+    --secondary: #060306;
     --accent: #ed6eed;
 }
 
@@ -78,22 +78,32 @@ li {
     text-align: left;
 }
 
+strong {
+    font-weight: bold;
+    text-shadow: 1px 0px 0px var(--text);
+    letter-spacing: 0.5px;
+}
+
 ul > li {
     list-style-type: square;
 }
 
 code {
-    font-size: 90%;
-    filter: brightness(0.9);
-    backdrop-filter: brightness(0.7);
+    background-color: var(--secondary);
     border-radius: 2px;
-    padding: 3px;
+    padding: 2px 4px;
     white-space: pre;
     font-family: SpaceMono, monospace;
 }
 
 i {
     padding-right: 1px;
+    color: var(--subtext);
+}
+
+i > strong,
+strong > i {
+    color: var(--text);
 }
 
 .list-item {
@@ -119,7 +129,7 @@ i {
 
 .updated,
 .tags {
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 .back {
@@ -149,26 +159,29 @@ blockquote {
 }
 
 .inline-code {
-    filter: brightness(0.9);
-    backdrop-filter: brightness(0.7);
+    background-color: var(--secondary);
     border-radius: 2px;
-    padding: 3px;
+    padding: 2px 4px;
     white-space: pre;
     font-family: SpaceMono, monospace;
 }
 
 .code-block {
-    font-size: 100%;
     display: block;
-    filter: brightness(0.9);
-    backdrop-filter: brightness(0.6);
     border-radius: 4px;
     padding: 4px 8px;
-    padding-top: -1em;
     white-space: pre;
     font-family: SpaceMono, monospace;
 }
 
 img {
     max-width: 100%;
+}
+
+.comments-title {
+    margin-top: 2rem;
+}
+
+.comments {
+    border: none;
 }
